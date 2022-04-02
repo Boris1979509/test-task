@@ -1,19 +1,33 @@
 <?php
 
+use App\Http\Controllers\Api\Auth\LoginController;
+use App\Http\Controllers\Api\Auth\RegisterController;
+use App\Http\Controllers\Api\Cabinet\HomeController;
+use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group([
+    'prefix' => 'auth',
+], static function () {
+    /**
+     * /api/auth/login
+     * /api/auth/register
+     * /api/auth/logout
+     */
+    Route::post('register', [RegisterController::class, 'register']);
+    Route::post('login', [LoginController::class, 'login']);
+    Route::delete('logout', [LoginController::class, 'logout']);
+});
+
+/** Auth User */
+Route::group(['middleware' => 'auth:sanctum'], static function () {
+    Route::get('user', static function (Request $request) {
+        return new UserResource($request->user());
+    });
+    /**
+     * /api/cabinet
+     */
+    Route::get('cabinet', HomeController::class);
 });
