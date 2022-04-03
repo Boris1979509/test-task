@@ -10,7 +10,10 @@ const store = createStore({
   },
 });
 /** Auth user */
-await store.dispatch("setLoggedIn");
+(async () => {
+  await store.dispatch("setLoggedIn");
+})();
+
 authGuard(store);
 
 export default store;
