@@ -2,9 +2,7 @@
 
 use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\Auth\RegisterController;
-use App\Http\Controllers\Api\Cabinet\HomeController;
-use App\Http\Resources\UserResource;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\Auth\UserController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -21,13 +19,5 @@ Route::group([
     Route::delete('logout', [LoginController::class, 'logout']);
 });
 
-/** Auth User */
-Route::group(['middleware' => 'auth:sanctum'], static function () {
-    Route::get('user', static function (Request $request) {
-        return new UserResource($request->user());
-    });
-    /**
-     * /api/cabinet
-     */
-    Route::get('cabinet', HomeController::class);
-});
+/** Get user data */
+Route::get('user', UserController::class);
