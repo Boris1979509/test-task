@@ -31,3 +31,4 @@ $ npm install
 ```sh
 $ npm run dev /localhost:8080/
 ```
+## Go to http://localhost:8080 and enjoy!
