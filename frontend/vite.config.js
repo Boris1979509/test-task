@@ -6,16 +6,16 @@ export default ({ mode }) => {
   // import.meta.env.VITE_NAME available here with: process.env.VITE_NAME
   // import.meta.env.VITE_PORT available here with: process.env.VITE_PORT
   return defineConfig({
-    base: process.env.NODE_ENV === "production" ? "/test-task/" : "/",
+    base: process.env.NODE_ENV === "production" ? "/test-task-client/" : "/",
     plugins: [vue()],
     resolve: {
       alias: {
         "@/": `${path.resolve(__dirname, "src")}/`,
       },
     },
-    server: {
-      port: process.env.VITE_PORT,
-      host: true,
-    },
+    // server: {
+    //   port: process.env.VITE_PORT,
+    //   host: true,
+    // },
   });
 };
